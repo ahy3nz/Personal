@@ -1,0 +1,15 @@
+#ifndef LIFECYCLE_H
+#define LIFECYCLE_H
+
+class LifeCycle {
+ public:
+  static int numObjs;
+  MyObject(const char *n = "--default--");
+  MyObject(const MyObject& rhs);
+  ~MyObject();
+  string getName() const;
+  void setNAme(const string newName);
+ private:
+  string name;
+  int id;
+};

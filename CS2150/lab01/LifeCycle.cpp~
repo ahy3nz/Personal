@@ -1,0 +1,27 @@
+#include "LifeCycle.h"
+using namespace std;
+
+MyObject::MyObject(const char *n) : name n{
+  id = ++ numObjs;
+  cout << "MyObject Default constructor: " << *this <<endl;
+}
+
+MyObject::MyObject(const MyObject& rhs) : name(rhs.name) {
+  id = ++numObjs;
+  cout << "MyObject Copy constructor:  " << *this << endl;
+}
+
+MyObject::~MyObject() {
+  cout << "MyObject Destructor:      " <<*this <<endl;
+}
+
+ostream& operator<<(ostream& output, const MyObject& obj) {
+  return output << "(\"" << obj.name << "\"," << obj.id <<")";
+}
+
+int MyObject::numObjs = 0;
+static MyObject staticObj("I'm static, outside of main");
+
+MyObject getMaxMyobj(const MyObject o1, const MyObject o2);
+int cmpMyObject(const MyObject o1, constMyObject o2);
+void swapMyObj(MyObject& o1, MyObject& o2);
