@@ -1,0 +1,2 @@
+#include <LifeCycle.h>
+Question: What is the "friend" title, and why can't I use it inside the public class definition?
