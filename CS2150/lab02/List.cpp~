@@ -1,0 +1,181 @@
+#include <iostream>
+#include <string>
+#include "List.h"
+#include "ListItr.h"
+#include "ListNode.h"
+
+using namespace std;
+List::List() {
+  head = new ListNode;
+  tail = new ListNode;
+  count = 0;
+  head->next = tail;
+  tail ->previous = head;
+}
+
+List::List(const List& source){
+  head = new ListNode;
+  tail = new ListNode;
+  head->next =tail;
+  tail->previous = head;
+  count =0;
+  ListItr iter(source.head->next);
+  while (!iter.isPastEnd()) {
+    insertAtTail(iter.retrieve());
+    iter.moveForward();
+  }
+
+
+}
+
+List::~List() {
+
+}
+
+List&List::operator=(const List& source) {
+  if (this == &source)
+    return *this;
+  else {
+    makeEmpty();
+    ListItr iter(source.head->next);
+    while(!iter.isPastEnd()){
+      insertAtTail(iter.retrieve());
+      iter.moveForward();
+    }
+  }
+  return *this;  
+}
+
+bool List::isEmpty() const {
+  if(count == 0) {
+    return true;
+  }
+  else {
+    return false;
+  }  
+}
+
+void List::makeEmpty() {
+  head = new ListNode();
+  tail = new ListNode();
+  count = 0;
+}
+
+ListItr List::first() {
+  return ListItr((*head).next);
+}
+
+ListItr List::last() {
+  return ListItr((*tail).previous);
+}
+
+void List::insertAfter(int x, ListItr position) {
+  //need to find the node listitr is pointing to
+  //make a node for the new value
+  //connect current node to new node
+  //connect new node to next node
+  //current - temp - next
+  ListNode *current = position.current;
+  ListNode *temp = new ListNode();
+  (*temp).value = x;
+  ListNode *next = (position.current)->next;
+  current->next = temp;
+  temp -> previous = current;
+  temp->next = next;
+  next->previous = temp;
+//  (*current).next = temp;
+  //  (*temp).previous = current;
+  //  (*next).previous = temp;
+  //  (*temp).next = next;
+}
+
+void List::insertBefore(int x, ListItr position) {
+  ListNode *current = position.current;
+  ListNode *temp = new ListNode();
+  (*temp).value = x;
+  ListNode *prev = (position.current)->previous;
+  //prev - temp - current
+  (*current).previous = temp; //connect current to temp
+  (*temp).next = current; //connect temp to current
+  (*prev).next = temp; //connect prev to temp
+  (*temp).previous = prev; //connect temp to prev
+}
+void List::insertAtTail(int x) {
+  ListNode *last = new ListNode;
+  last = tail; // problem here
+  cout << last << endl;
+  //cout << *last << endl;
+  ListNode *temp = new ListNode;
+  (*temp).value = x;
+  if(head == tail) {
+    tail = temp;
+    tail->previous = last;
+    last-> next = tail;
+  }
+  else {
+  }
+ 
+   
+  
+  
+ 
+    //  (*prev).next = temp; //connect previous to temp
+    //  (*temp).previous = prev; //connect temp to previous
+    //  (*temp).next = tail; //connect  temp to tail
+    //  (*tail).previous = temp; //connect tail to temp
+
+}
+
+void List::remove(int x) {
+  ListItr *itr = new ListItr(head);
+  while((*itr).current->value != x) {
+    (*itr).moveForward();
+  }
+  ListNode *prev = (*itr).current->previous;
+  ListNode *next = (*itr).current->next;
+  (*prev).next = next;
+  (*next).previous = prev;
+}
+
+ListItr List::find(int x) {
+  ListItr *itr = new ListItr(head);
+  while((*itr).current->value != x) {
+    (*itr).moveForward();
+  }
+  return *itr;
+}
+
+int List::size() const {
+  int count = 0;
+  ListItr *itr = new ListItr(head);
+  while(!(*itr).isPastEnd()) {
+    count++;
+    *itr =  (*itr).current->next;
+  }
+  return count;
+}
+
+void printList(List& source, bool direction) {
+    if(direction) {
+    ListItr itr = (source).first(); //create listitr pointing at the head
+    cout << itr.retrieve()<<2 << endl;
+    while(!(itr.isPastEnd())) {
+      	cout << itr.retrieve() << endl;
+	itr.moveForward();
+	}
+  }
+  else {
+    ListItr itr = (source).last();
+    while(!(itr.isPastBeginning())) {
+      cout <<itr.retrieve() << endl;
+      itr.moveBackward();
+    }
+  }
+
+
+
+
+
+    
+
+}
