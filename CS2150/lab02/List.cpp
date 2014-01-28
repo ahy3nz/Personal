@@ -11,23 +11,29 @@
 //copying list with operator = does not copy first and last elements
 using namespace std;
 List::List() {
-  head = NULL;
-  tail = NULL;
+  //  head = NULL;
+  //  tail = NULL;
   count = 0;
-  //head->next = tail;
-  //head->previous = NULL;
-  //tail->previous = head;
-  //tail->next = NULL;
+  head = new ListNode;
+  tail = new ListNode;
+  head->next = tail;
+  head->previous = NULL;
+  tail->previous = head;
+  tail->next = NULL;
 }
 
 List::List(const List& source){
-  List *thing = new List;
-  ListItr iter(source.head->next);
-  while(!iter.isPastEnd()) {
-    thing->insertAtTail(iter.retrieve());
-    cout<<"blah"<<endl;
-    iter.moveForward();
-  }
+head=new ListNode;
+    tail=new ListNode;
+    head->next=tail;
+    tail->previous=head;
+    count=0;
+    ListItr iter(source.head->next);
+    while (!iter.isPastEnd()) {       // deep copy of the list
+        insertAtTail(iter.retrieve());
+        iter.moveForward();
+    }
+
   
   
 
@@ -42,9 +48,9 @@ List&List::operator=(const List& source) {
     return *this;
   else {
     makeEmpty();
-    ListItr iter(source.head->next);
-    while(!iter.isPastEnd()){
-      insertAtTail(iter.retrieve());
+        ListItr iter(source.head->next);   
+    while(!iter.isPastEnd()){      
+      insertAtTail(iter.retrieve());     
       iter.moveForward();
     }
   }
@@ -61,17 +67,27 @@ bool List::isEmpty() const {
 }
 
 void List::makeEmpty() {
-  head = NULL;
-  tail = NULL;
+  // ListNode *temp = new ListNode;
+  
+  while(head->next != tail) {
+    ListNode *temp = head->next;
+    head->next = head->next->next;
+    delete head->next;
+  }
+
+ 
+  head->next = tail;
+  tail->previous = head;
+ 
   count = 0;
 }
 
 ListItr List::first() {
-  return ListItr(head);
+  return ListItr(head->next);
 }
 
 ListItr List::last() {
-  return ListItr(tail);
+  return ListItr(tail->previous);
 }
 
 void List::insertAfter(int x, ListItr position) {
@@ -102,15 +118,27 @@ void List::insertBefore(int x, ListItr position) {
 void List::insertAtTail(int x) {
   ListNode *temp = new ListNode;
   (*temp).value = x;
-  if(tail) { //if something between head and tail
-       tail->next =temp;
-    temp->previous = tail;
-    temp->next = NULL;
+  
+  if(isEmpty()) { //if something between head and tail
+    //tail->next =temp;
+    //tail->previous->next = temp;
+    head->next = temp;
+    temp->previous = tail->previous;
+    temp->next = tail;
+    tail->previous = temp;
+    tail->next = NULL;
+    head->previous = NULL;
   }
   else {
-    head = temp;
+    tail->previous->next = temp;
+    temp->previous = tail->previous;
+    temp->next = tail;
+    tail->previous = temp;
+    tail->next = NULL;
+    tail->next = NULL;
+    head->previous = NULL;
   }
-  tail = temp;
+  
   count++;
 
   }
@@ -140,7 +168,7 @@ int List::size() const {
     *itr =  (*itr).current->next;
   }
   count++;
-  return count;
+  return count-2;
 }
 
 void printList(List& source, bool direction) {
@@ -150,7 +178,7 @@ void printList(List& source, bool direction) {
     	cout << itr.retrieve() << endl;
    	itr.moveForward();
     }
-    cout << itr.retrieve() <<endl;
+    //    cout << itr.retrieve() <<endl;
   }
   else {
     ListItr itr = (source).last();
@@ -161,7 +189,7 @@ void printList(List& source, bool direction) {
       cout <<itr.retrieve() << endl;
       itr.moveBackward();
     }
-    cout<< itr.retrieve() << endl;
+    //    cout<< itr.retrieve() << endl;
 
   }
 

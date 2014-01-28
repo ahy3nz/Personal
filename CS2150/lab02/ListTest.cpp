@@ -309,12 +309,11 @@ int   main ()
                 break;
             }
             case 15: {
-                List* old_list=list;
-                list=new List();
-                *list=*old_list;
-                old_list->makeEmpty();
-
-                cout << "The new list is (forward ): " ;
+	      List* old_list=list;
+	      list=new List();
+	      *list=*old_list;
+	      old_list->makeEmpty();
+	      cout << "The new list is (forward ): " ;
                 printList(*list,true);
                 cout << "The new list is (backward): " ;
                 printList(*list,false);
