@@ -1,0 +1,4 @@
+#Alex Yang
+#Thursday, January 23, 2014
+#postlab1.question.txt
+Question: What are the differences and benefits/disadvantages of creating a pointer to a linked list and just creating a linked list?
