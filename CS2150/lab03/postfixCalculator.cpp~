@@ -1,0 +1,141 @@
+#include <iostream>
+#include <string>
+#include <stack>
+#include "postfixCalculator.h"
+
+postfixCalculator::postfixCalculator() {
+  
+}
+
+postfixCalculator::postfixCalculator(string expression) {
+  for(int x = 0; x < expression.size(); x++) {
+    char c = expression.at(x);
+    cout << c << endl;
+    if( c == '+') {
+      add();
+    }
+    else if (c == '-') {
+      subtract();
+    }
+    else if (c == '*') {
+      multiply();
+    }
+    else if (c == '/') {
+      divide();
+    }
+    else if (c =='~') {
+      negate();
+    }
+    else if (c == ' ') {
+    }
+    else {
+      
+      expressionstack.push(c);
+      cout << expressionstack.top() << endl;
+    }
+  }
+   
+  
+}
+
+postfixCalculator:: ~postfixCalculator() {
+    delete this;
+  }
+
+void postfixCalculator::add() {
+  if(expressionstack.empty())
+    {
+      cout <<  "Error: No integers left in the stack!";
+    }
+  else {
+    int int1 = expressionstack.top();
+    expressionstack.pop();
+    int int2 = expressionstack.top();
+    expressionstack.pop();
+    expressionstack.push(int1 + int2);
+  }
+}
+
+void postfixCalculator::subtract() {
+if(expressionstack.empty())
+    {
+      cout << "Error: No integers left in the stack!";
+    }
+  else {
+    int int1 = expressionstack.top();
+    expressionstack.pop();
+    int int2 = expressionstack.top();
+    expressionstack.pop();
+    expressionstack.push(int2 - int1);
+  }
+}
+
+void postfixCalculator::multiply() {
+if(expressionstack.empty())
+    {
+      cout << "Error: No integers left in the stack!";
+    }
+  else {
+    int int1 = expressionstack.top();
+    expressionstack.pop();
+    int int2 = expressionstack.top();
+    expressionstack.pop();
+    expressionstack.push(int1 * int2);
+  }
+}
+
+void postfixCalculator::divide() {
+if(expressionstack.empty())
+    {
+      cout << "Error: No integers left in the stack!";
+    }
+  else {
+    int int1 = expressionstack.top();
+    expressionstack.pop();
+    int int2 = expressionstack.top();
+    expressionstack.pop();
+    expressionstack.push(int2 / int1);
+  }
+}
+
+void postfixCalculator::negate() {
+if(expressionstack.empty())
+    {
+      cout <<  "Error: No integers left in the stack!";
+    }
+  else {
+    int int1 = expressionstack.top();
+    expressionstack.pop();
+    expressionstack.push(-1 * int1);
+  }
+}
+
+void postfixCalculator::addExpression(string expression) {
+for(int x = 0; x < expression.size(); x++) {
+    char c = expression.at(x);
+    if( c == '+') {
+      add();
+    }
+    else if (c == '-') {
+      subtract();
+    }
+    else if (c == '*') {
+      multiply();
+    }
+    else if (c == '/') {
+      divide();
+    }
+    else if (c =='~') {
+      negate();
+    }
+    else if (c == ' ') {
+    }
+    else {
+      expressionstack.push(c);
+    }
+  }
+}
+
+int postfixCalculator::answer() {
+  return expressionstack.top();
+}
