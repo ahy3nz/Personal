@@ -20,11 +20,16 @@ postfixCalculator::postfixCalculator(string expression) {
       add();
     }
     else if (c == '-') {
-      if ( expression.at(x+1) != ' ') {
+      if ( x+1 >= expression.size() ) {
+	subtract();
+      }
+
+      else {
+	if (expression.at(x+1) != ' ') { //if this is a negative sigm
 	x++;
-	while(expression.at(x) != ' ') {
-	  element += expression.at(x);
-	  x++;
+	while(expression.at(x) != ' ') { //while the current char is a number
+	  element += expression.at(x); //append number to function
+	  x++; //look at the next char
 	}
 	const char *cstring = element.c_str();
 	int topush = -1 * atoi(cstring);
@@ -34,7 +39,9 @@ postfixCalculator::postfixCalculator(string expression) {
       else {
 	subtract();
       }
-    }
+	
+      }
+    }	
     else if (c == '*') {
       multiply();
     }

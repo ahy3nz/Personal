@@ -7,8 +7,13 @@ using namespace std;
    testPostfixCalc.cpp */
 
 int main() {
-  string str = "20 10 - -3 10 - - 2 - ";
-  postfixCalculator *calc = new postfixCalculator(str);
-  cout << calc->answer() <<endl;
+  string topass;
+   
+  getline(cin, topass);
+  //string str = "20 10 - -3 10 - - 2 - ";
+  cout <<"You entered: " << topass << endl;
+  
+   postfixCalculator *calc = new postfixCalculator(topass);
+   cout << "Answer: " << calc->answer() <<endl;
   return 0;
 }
