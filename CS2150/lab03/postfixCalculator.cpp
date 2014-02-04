@@ -3,6 +3,9 @@
 #include <stack>
 #include <cstdlib>
 #include "postfixCalculator.h"
+/*Alexander Yang
+  2/3/14
+  postfixCalculator.cpp */
 
 postfixCalculator::postfixCalculator() {
   
