@@ -1,4 +1,4 @@
-/*
+/* By Alex Yang (ahy3nz) 2/6/14
  * Filename: List.h
  * Description: List class definition
  * 	also includes the prototype for non-member function print()

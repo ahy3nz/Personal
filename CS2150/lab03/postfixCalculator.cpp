@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include "postfixCalculator.h"
 /*Alexander Yang
-  2/3/14
+  2/6/14
   postfixCalculator.cpp */
 
 postfixCalculator::postfixCalculator() {

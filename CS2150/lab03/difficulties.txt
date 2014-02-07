@@ -1,0 +1,5 @@
+//Alex Yang (ahy3nz)
+//February 6th, 2014
+
+One of the difficulties I had was dealing with negative numbers and subtraction. My solution was just to code ifelse statements for every scenario
+another problem was converting a series of characters (a string) into an int. I had to look up various methods to convert strings to ints. Initially, I coded such that a character would be converted to int, but not a series of characters as as tring to an int

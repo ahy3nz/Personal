@@ -3,6 +3,7 @@
 #include "List.h"
 #include "ListItr.h"
 #include "ListNode.h"
+//By Alex Yang(ahy3nz) on 2/6/14
 //Issues: first and last node are considered past the end (moving itr forward and backward
 //retrieving first or last elemtn is considered past end or past beginning
 //inserting element before first
