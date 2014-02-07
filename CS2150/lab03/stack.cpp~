@@ -1,0 +1,31 @@
+/*Alex Yang (ahy3nz)
+  February 6th, 2014 */
+#include <iostream>
+#include <string>
+#include "List.h"
+#include "ListItr.h"
+#include "ListNode.h"
+#include "stack.h"
+
+using namespace std;
+
+stack::stack() {
+
+}
+void stack::push(int e) {
+  ListNode *toadd = new ListNode;
+  (*toadd).value = e;
+  items.insertAtTail(e);
+}
+
+int stack::top() {
+  return items.last()->previous->value;
+}
+
+void stack::pop() {
+  items.last()->previous = items.list()->previous->previous;
+}
+
+bool stack::empty() {
+  return items.isEmpty();
+}

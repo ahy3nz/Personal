@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <string>
-#include <stack>
+#include "stack.h"
 using namespace std;
 
 class postfixCalculator {
@@ -25,7 +25,7 @@ class postfixCalculator {
   int answer();
 
  private:
-  stack<int> expressionstack;
+  stack expressionstack;
 };
 
 #endif

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <stack>
+#include "stack.h"
 #include <cstdlib>
 #include "postfixCalculator.h"
 /*Alexander Yang

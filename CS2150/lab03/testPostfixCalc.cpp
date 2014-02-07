@@ -14,6 +14,6 @@ int main() {
   cout <<"You entered: " << topass << endl;
   
    postfixCalculator *calc = new postfixCalculator(topass);
-   cout << "Answer: " << calc->answer() <<endl;
+    cout << "Answer: " << calc->answer() <<endl;
   return 0;
 }
