@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <math.h>
+#include <limits>
 
 using namespace std;
 
@@ -9,7 +10,7 @@ public:
   prelab4();
   void sizeOfTest();
   string outputBinary(unsigned int x);
-  //void overflow();
+  void overflow();
 
 };
 prelab4::prelab4() {
@@ -74,15 +75,27 @@ string prelab4::outputBinary(unsigned int x) {
     }
   }
   string exponent = string(exp);
+  cout << "Exponent: " << exponent<<endl;
   string mantiss = string(mantissa);
-  string toreturn= exponent + ", " + mantiss;
+  cout << "Manissa: " << mantiss<<endl;
+  string toreturn= exponent + mantiss;
   return toreturn;
 
 }
 
+void prelab4::overflow() {
+  unsigned int maxint = std::numeric_limits<unsigned int>::max();
+  cout << "Adding 1 to maximum unsigned int: " << maxint + 1 <<endl;
+  cout << "We obtain 0 because we add 1 to the maximum value. By counting up 1, all the bits switch to zero, and we are left with no next-significant-bit to turn to 1, so the value reduces to 0" <<endl;
+}
+
 int main() {
- prelab4 * test = new prelab4();
+  prelab4 * test = new prelab4();
   test->sizeOfTest();
-  cout<<  test->outputBinary(24) << endl;
+  int x;
+  cout << "Enter decimal integer to convert : ";
+  cin >> x;
+  cout<<  test->outputBinary(x) << endl;
+  test->overflow();
   return 0;
 }
