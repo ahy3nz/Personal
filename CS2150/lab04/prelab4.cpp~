@@ -1,0 +1,37 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class prelab4 {
+public:
+  int sizeOfTest();
+  // string outputBinary(int x);
+  //void overflow();
+
+};
+
+int prelab4::sizeOfTest() {
+  int a = 4;
+  cout << "size of integer:" <<  sizeof(a) << endl;
+  unsigned int b = 4;
+  cout << "size of unsigned int" << sizeof(b) << endl;
+  float c = 4;
+  cout <<"size of float:" << sizeof(c)<<endl;
+  double d = 4;
+  cout <<"size of double:" << sizeof(d)<<endl;
+  bool e = true;
+  cout << "size of bool:" << sizeof(e)<<endl;
+  int *f = 4;
+  cout << "size of int*:"<<sizeof(f)<<endl;
+  char *g = '4';
+  cout << "size of char*:" << sizeof(g)<<endl;
+  double *h = 4;
+  cout << "size of double*:" << sizeof(h)<<endl;
+    
+}
+
+int main() {
+  sizeOfTest();
+  return 0;
+}
