@@ -2,6 +2,8 @@
 #include <string>
 #include <math.h>
 #include <limits>
+#include <climits>
+
 
 using namespace std;
 
@@ -30,6 +32,7 @@ void prelab4::sizeOfTest() {
   int *f = &a;
   cout << "size of int*: "<<sizeof(f)<<endl;
   char i  = '4';
+  cout<< "size of char: " <<sizeof(char)<<endl;
   char *g = &i;
   cout << "size of char*: " << sizeof(g)<<endl;
   double *h = &d;
@@ -77,7 +80,7 @@ string prelab4::outputBinary(unsigned int x) {
   string exponent = string(exp);
   cout << "Exponent: " << exponent<<endl;
   string mantiss = string(mantissa);
-  cout << "Manissa: " << mantiss<<endl;
+  cout << "Mantissa: " << mantiss<<endl;
   string toreturn= exponent + mantiss;
   return toreturn;
 
@@ -85,6 +88,14 @@ string prelab4::outputBinary(unsigned int x) {
 
 void prelab4::overflow() {
   unsigned int maxint = std::numeric_limits<unsigned int>::max();
+  //int d =  INTPTR_MAX;
+  int i =1;
+  unsigned int j = 1;
+  float f = 1 ;
+  double d = 1;
+  bool b = true;
+  char p ='1';
+  cout << "max int: "<< i<<j<<f<<d<<b<<p<<endl;
   cout << "Adding 1 to maximum unsigned int: " << maxint + 1 <<endl;
   cout << "We obtain 0 because we add 1 to the maximum value. By counting up 1, all the bits switch to zero, and we are left with no next-significant-bit to turn to 1, so the value reduces to 0" <<endl;
 }

@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <limits>
+#include <climits>
+
+using namespace std;
+
+class inlab4{
+  inlab4();
+};
+
+inlab4::inlab4() {
+}
+
+int main() {
+  test = new inlab4();
+  bool b = true;
+  char c = '0';
+  int i = 0;
+  double d = 0;
+  int *p = &i;
+  cout << "Values: "<<endl;
+  cout << "Bool: " << b<< endl;
+  cout << "Char: "<< c << endl;
+  cout << "Int: "<< i << endl;
+  cout << "Double: " << d << endl;
+  cout << "*Int: " << p <<endl;
+  cout << "Done"<<endl;
+  return 0;
+}
