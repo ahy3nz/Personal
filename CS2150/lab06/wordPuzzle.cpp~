@@ -1,0 +1,45 @@
+/* Alex Yang ahy3nz */
+#include "GetWordInTable.h"
+#include "hashTable.h"
+#include <string>
+#include <iostream>
+#include <cstdlib>
+#include <stdlib.h>
+#include <list>
+
+//void readInDict(hashTable table, string dictionary);
+
+int main(int argc, char **argv) {
+  cout << "start" << endl;
+  char table[500][500];
+  cout << "h" <<endl;
+  hashTable htable = new hashTable();
+  string dict = argv[1];
+  string grid = argv[2];
+  cout << "hi1" << endl;
+  //Need to make the hashtable
+  //readInDict(table, dict);
+  cout<< "hi2"<<endl;
+
+  //Need to read in the grid
+  int rows, cols;
+  GetWordInTable g = new GetWordInTable;
+  g.readInTable(grid, rows,cols);
+  cout << table <<endl;
+
+  //Need search 
+}
+
+/*void readInDict(hashTable table, string dictionary) {
+  string line ="hi";
+
+  ifstream file(dictionary.c_str());
+  while ( getline (file, line)) {
+    getline (file, line);
+    unsigned int a = table->hash(line);
+    table->add(a, line);
+  }
+
+  
+}
+*/
