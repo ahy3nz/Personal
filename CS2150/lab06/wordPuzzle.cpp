@@ -14,19 +14,23 @@
 #include <list>
 #include "timer.h"
 using namespace std;
-void readInDict(hashTable *table, string dictionary, int &maxlength);
+
+const double load = .75;
+
+//void readInDict(hashTable htable, string dictionary, int &maxlength);
+hashTable readInDict(string dictionary, int&maxlength);
 bool readInTable(string filename, int &rows, int&cols,char table[500][500]);
 char* getWordInTable (int startRow, int startCol, int dir, int len,
                       int numRows, int numCols,char grid[500][500]);
 
 int main(int argc, char **argv) {
    char grid[500][500];
-   hashTable *htable = new hashTable();
+   //  hashTable *htable = new hashTable();
    int maxlength;
   string dict = argv[1];
   string gridname = argv[2];
     //Need to make the hashtable from dictionary
-  readInDict(htable, dict, maxlength);
+  hashTable htable =  readInDict(dict, maxlength);
  
 
   //Need to read in the grid
@@ -40,16 +44,19 @@ int main(int argc, char **argv) {
   for(int a=0; a<rows;a++) {
     for(int b =0; b<cols; b++) {
       for(int c = 0; c<8; c++) {
-	for(int d = 0; d<maxlength;d++) {
-	  
-	    char* word = getWordInTable(a,b,c,d,rows,cols,grid);
+	//check if prefixes in this direction exist before looking at full words
+	char* prefix = getWordInTable(a,b,c,2,rows,cols,grid);
+	if(htable.contains(prefix) ) {
+	  for(int d = 0; d<maxlength;d++) {
 	    
+	    char* word = getWordInTable(a,b,c,d,rows,cols,grid);
+	    //is the word technically a word? at least 3 logn)
 	    if(string(word).length() >=3) {
 	      //check if the word is in the hash table
-	      if (htable->contains(word)) {
+	      if (htable.contains(word)) {
 		found->push_back(word);
 		int oldsize = found->size();
-		found->unique();
+			found->unique();
 		if(oldsize == found->size()) {
 		  //		found->unique();
 		  switch (c) { // assumes table[0][0] is in the upper-left
@@ -85,7 +92,8 @@ int main(int argc, char **argv) {
 		  }
 		}
 	      }
-	    }
+	        }
+	  }
 	}
       }
     }
@@ -94,6 +102,38 @@ int main(int argc, char **argv) {
   cout<<found->size()<< " words found" <<endl;
   cout<<"Found all words in " << t.getTime() << " seconds" <<endl;
 }
+hashTable readInDict(string dictionary, int&maxlength) {
+  string line;
+  int size;
+  ifstream file1(dictionary.c_str());
+  while(getline(file1, line)) {
+    size = size +1;
+  }
+
+  ifstream file2(dictionary.c_str());
+  hashTable *htable = new hashTable( (int) size/load);
+  //hashTable *htable = new hashTable(size); //no load factor
+  while(getline(file2,line)) {
+    if (line.length() > maxlength) {
+      maxlength = line.length();
+    }
+
+    string prefix = line.substr(0,2);
+    htable->add(htable->hash(prefix), prefix);
+
+
+    unsigned int a = htable->hash(line);
+    htable->add(a,line);
+    
+  }
+  return *htable;
+  
+}
+
+
+
+
+
 void readInDict(hashTable *htable, string dictionary, int &maxlength) {
   string line;
   
@@ -103,7 +143,17 @@ void readInDict(hashTable *htable, string dictionary, int &maxlength) {
       maxlength = line.length();
     }
     unsigned int a = htable->hash(line);
+    //begin prefix work
+    for(int x = 0; x<line.length();x++)
+      {
+	string prefix = line.substr(0,x);
+	htable->add(htable->hash(prefix), prefix);
+      }
+    
+    //end prefix work
     htable->add(a,line);
+    /* include prefixes by hashing substrings*/
+    
     
   }
   

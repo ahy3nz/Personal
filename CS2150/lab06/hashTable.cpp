@@ -1,6 +1,7 @@
 /* Alex Yang ahy3nz */
 #include "hashTable.h"
 #include <string>
+#include <vector>
 #include <math.h>
 #include <iostream>
 #include <cstdlib>
@@ -19,15 +20,30 @@ hashTable::hashTable() {
   // list<string> table[25147];
   
 }
+hashTable::hashTable(int size) {
+  int  s = getNextPrime(size);
+  //  table = new vector<list<string> >(s);
+  table.resize(s);
+}
+
 unsigned int hashTable::hash(string s) {
-  unsigned int  sum = 0;
+  /*  unsigned int  sum = 0;
   int len = s.length()+1;
   char * a = new char[len];
   strcpy(a, s.c_str());
   for(int x =0; x< s.size()+1; x++) {
     sum = sum + a[x]*pow(37,x);
+    } */
+
+  //another hash function
+  unsigned int sum = 0;
+  int len = s.length() + 1;
+  char *a =new char[len];
+  strcpy(a, s.c_str());
+  while (*a) {
+    sum = sum*101+ *a++;
   }
-  return (sum % 25147); //mod the sum by the table size
+  return (sum % table.size()); //mod the sum by the table size
   
 }
 
@@ -46,4 +62,21 @@ bool hashTable::contains(char *word) {
   }
 
   return false;
+}
+bool hashTable::checkprime(unsigned int p) {
+    if ( p <= 1 ) // 0 and 1 are not primes; the are both special cases
+        return false;
+    if ( p == 2 ) // 2 is prime
+        return true;
+    if ( p % 2 == 0 ) // even numbers other than 2 are not prime
+        return false;
+    for ( int i = 3; i*i <= p; i += 2 ) // only go up to the sqrt of p
+        if ( p % i == 0 )
+            return false;
+    return true;
+}
+
+int hashTable::getNextPrime (unsigned int n) {
+    while ( !checkprime(++n) );
+    return n; // all your primes are belong to us
 }
