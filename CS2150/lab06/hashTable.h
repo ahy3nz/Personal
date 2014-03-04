@@ -18,7 +18,7 @@ class hashTable {
   hashTable(int size);
   unsigned int hash(string s);
   void add(unsigned int n, string s);
-  bool contains(char *word);
+  bool contains(const char *word);
   bool checkprime(unsigned int p);
   int getNextPrime(unsigned int n);
  private:

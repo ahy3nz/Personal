@@ -36,9 +36,10 @@ int main(int argc, char **argv) {
   //Need to read in the grid
   int rows, cols;
   readInTable(gridname, rows,cols,grid);
-  list<string> *found = new list<string>();
+  
   //GetWordInTable *g = new GetWordInTable;
   //Search for words
+  int count =0;
   timer t;
   t.start();
   for(int a=0; a<rows;a++) {
@@ -47,17 +48,17 @@ int main(int argc, char **argv) {
 	//check if prefixes in this direction exist before looking at full words
 	char* prefix = getWordInTable(a,b,c,2,rows,cols,grid);
 	if(htable.contains(prefix) ) {
-	  for(int d = 0; d<maxlength;d++) {
-	    
+	  
+	  for(int d = 0; d<22;d++) {
 	    char* word = getWordInTable(a,b,c,d,rows,cols,grid);
+	    
 	    //is the word technically a word? at least 3 logn)
 	    if(string(word).length() >=3) {
 	      //check if the word is in the hash table
 	      if (htable.contains(word)) {
-		found->push_back(word);
-		int oldsize = found->size();
-			found->unique();
-		if(oldsize == found->size()) {
+		
+		if(string(word).length() == d) {
+		  count ++;
 		  //		found->unique();
 		  switch (c) { // assumes table[0][0] is in the upper-left
 		  case 0:
@@ -65,11 +66,11 @@ int main(int argc, char **argv) {
 		    break; // north
 		  case 1:
 		    cout<<"NE"<<"("<<a<<","<<b<<"):\t"<<word<<endl;
-		    c++;
+		    
 		    break; // north-east
 		  case 2:
 		    cout<<"E"<<"("<<a<<","<<b<<"):\t\t"<<word<<endl;
-		    c++;
+		    
 		    break; // east
 		  case 3:
 		    cout<<"SE"<<"("<<a<<","<<b<<"):\t"<<word<<endl;
@@ -98,18 +99,23 @@ int main(int argc, char **argv) {
       }
     }
   }
+  
   t.stop();
-  cout<<found->size()<< " words found" <<endl;
+  cout<<count<< " words found" <<endl;
+  double tim = t.getTime();
+  int i = 1000000*tim;
   cout<<"Found all words in " << t.getTime() << " seconds" <<endl;
+  cout<<(i)<<endl;
 }
 hashTable readInDict(string dictionary, int&maxlength) {
   string line;
   int size;
+  int count = 0;
   ifstream file1(dictionary.c_str());
   while(getline(file1, line)) {
     size = size +1;
   }
-
+  // vector<string> out = vector<string>();
   ifstream file2(dictionary.c_str());
   hashTable *htable = new hashTable( (int) size/load);
   //hashTable *htable = new hashTable(size); //no load factor
@@ -124,8 +130,13 @@ hashTable readInDict(string dictionary, int&maxlength) {
 
     unsigned int a = htable->hash(line);
     htable->add(a,line);
+    //out.push_back(line);
+    count++;
     
   }
+  
+
+
   return *htable;
   
 }

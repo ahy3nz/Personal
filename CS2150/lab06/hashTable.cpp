@@ -51,7 +51,7 @@ void hashTable::add(unsigned int n, string s) {
   table[n].push_back(s);
 }
 
-bool hashTable::contains(char *word) {
+bool hashTable::contains(const char *word) {
   string s(word);
   for( list<string>::iterator it=  table[hash(word)].begin(); it!=table[hash(word)].end(); it++) {
     

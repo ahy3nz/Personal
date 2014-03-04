@@ -1,7 +1,8 @@
 # Makefile for CS 2150 pre-lab 6
 
 # Defines the C++ compiler we'll be using
-CXX	= clang++
+CXX	= clang++ -O2
+#CXX 	= clang++
 
 # Defines the flags we'll be passing to the C++ compiler
 CXXFLAGS	= -Wall -g
