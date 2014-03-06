@@ -48,6 +48,7 @@ int main(int argc, char **argv) {
 	//check if prefixes in this direction exist before looking at full words
 	char* prefix = getWordInTable(a,b,c,2,rows,cols,grid);
 	if(htable.contains(prefix) ) {
+	//	if (true){
 	  
 	  for(int d = 0; d<22;d++) {
 	    char* word = getWordInTable(a,b,c,d,rows,cols,grid);

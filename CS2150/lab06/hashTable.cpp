@@ -21,28 +21,30 @@ hashTable::hashTable() {
   
 }
 hashTable::hashTable(int size) {
-  int  s = getNextPrime(size);
+    int  s = getNextPrime(size);
+    //int s = getNextPrime(100000);
+  
   //  table = new vector<list<string> >(s);
   table.resize(s);
 }
 
 unsigned int hashTable::hash(string s) {
-  /*  unsigned int  sum = 0;
+  /*   unsigned int  sum = 0;
   int len = s.length()+1;
   char * a = new char[len];
   strcpy(a, s.c_str());
   for(int x =0; x< s.size()+1; x++) {
     sum = sum + a[x]*pow(37,x);
-    } */
-
+    } 
+  */
   //another hash function
-  unsigned int sum = 0;
+    unsigned int sum = 0;
   int len = s.length() + 1;
   char *a =new char[len];
   strcpy(a, s.c_str());
   while (*a) {
     sum = sum*101+ *a++;
-  }
+    } 
   return (sum % table.size()); //mod the sum by the table size
   
 }
