@@ -1,4 +1,4 @@
-C00A	00
+C00A	00				jump to code skip vars
 0000	01	i	dw	0	int i
 0000	02	curr	dw	0	curr
 0030	03	a	dw	0	int a[]
@@ -18,15 +18,16 @@ D02B	10		jmpe	xit
 3008	11		load		prepare to get element for subt
 5003	12		add	a	add base address to customcode
 5001	13		add	i	add index to custom code
+B000	14		store	sub	store sub into code
 3009	15		load		prepare to get current element
 5003	16		add	a	add base address
 5001	17		add	i	add index
 4019	18		store	curr	store into current val
-0000	19		load	curr	load the current value
+3002	19		load	curr	load the current value
 4002	1A		store		store this value as a variable
-6005	1B				subtract max
-B000	1C
-B000	1D		print	print	print
+3002	1B		load	curr	load the curr
+6005	1C	sub	sub	sub	subt max (thru customcode)
+B000	1D		blank	blank	blank
 E020	1E		jmpl	nu	if curr > maxval, set new maxval
 C024	1F		jmp	nx	jmp nx otherwise
 3001	20	nu	load	i	load i to increment
@@ -34,7 +35,7 @@ C024	1F		jmp	nx	jmp nx otherwise
 4001	22		store	i	store i+1 to i
 C00D	23		jmp	loop	goto loop
 3002	24	nx	load 	curr	load curret value
-B000	25		
+1800	25		
 4005	26		store	max	store current as new max value
 3001	27		load	i	load i to increment
 5007	28		add	1	add 1 to i
@@ -45,8 +46,8 @@ C00D	2A		jmp	loop	goto loop
 B000	2D		
 B000	2E		
 0000	2F	HALT
-B007	30	a(0)	dw	4	int a(0)
-B003	31	a(1)	dw	3	int a(1)
-B002	32	a(2)	dw	2	int a(2)
-B001	33	a(3)	dw	1	int a(3)
-B005	34	a(4)	dw	5	int a(4)
+0007	30	a(0)	dw	4	int a(0)
+0003	31	a(1)	dw	3	int a(1)
+0002	32	a(2)	dw	2	int a(2)
+0001	33	a(3)	dw	1	int a(3)
+0005	34	a(4)	dw	5	int a(4)
