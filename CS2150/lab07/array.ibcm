@@ -1,0 +1,53 @@
+C00A	00
+0000	01	i	dw	0	int i
+0000	02	curr	dw	0	curr
+0030	03	a	dw	0	int a[]
+0005	04	n	dw	0	size of array(5)
+0000	05	max	dw	0	max val
+0000	06	zero	dw	0	
+0001	07	one	dw	1
+6000	08	subt	dw	6000
+3000	09	load	dw	3000
+3005	0A		load	zero	
+4001	0B		store	i	i=0
+4005	0C		store	max	max=0
+3004	0D	loop	load	n	if(i>=N goto xit)
+6001	0E		sub	i	subtract i from n
+E02B	0F		jmpl	xit	goto xit if i>=n
+D02B	10		jmpe	xit	
+3008	11		load		prepare to get element for subt
+5003	12		add	a	add base address to customcode
+5001	13		add	i	add index to custom code
+401C	14		store	sub	store sub into code
+3009	15		load		prepare to get current element
+5003	16		add	a	add base address
+5001	17		add	i	add index
+4019	18		store	curr	store into current val
+0000	19		load	curr	load the current value
+4002	1A		store		store this value as a variable
+3005	1B		load	max	load the maxval
+0000	1C	sub	sub	sub	subt curr (thru customcode)
+B000	1D		print	print	print
+E020	1E		jmpl	nu	if curr > maxval, set new maxval
+C024	1F		jmp	nx	jmp nx otherwise
+3001	20	nu	load	i	load i to increment
+5007	21		add	1	add 1 to i
+4001	22		store	i	store i+1 to i
+C00D	23		jmp	loop	goto loop
+3002	24	nx	load 	curr	load curret value
+B000	25		
+4005	26		store	max	store current as new max value
+3001	27		load	i	load i to increment
+5007	28		add	1	add 1 to i
+4001	29		store	i	store i+1 to i
+C00D	2A		jmp	loop	goto loop
+3005	2B	xit	load	max	loadmax
+1800	2C		print	max	print max value	
+B000	2D		
+B000	2E		
+0000	2F	HALT
+B007	30	a(0)	dw	4	int a(0)
+B003	31	a(1)	dw	3	int a(1)
+B002	32	a(2)	dw	2	int a(2)
+B001	33	a(3)	dw	1	int a(3)
+B005	34	a(4)	dw	5	int a(4)

@@ -1,0 +1,4 @@
+C002	00	jmp	start	skip vars
+0001	01	one	dw	1
+3001	02	load	load1
+1800	03	printH

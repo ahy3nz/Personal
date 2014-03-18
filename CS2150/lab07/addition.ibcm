@@ -1,0 +1,27 @@
+B000	01	a	dw	0	int a
+B000	02	b	dw	0	int b
+B000 	03	c	dw	0	int c
+B000	04	sum	dw	0	empty space
+B000	05				empty space
+B000	06				empty space
+1000	07	start	readH		read input into acc
+4001	08	store	a		store into a
+1000	09		readH		read input into acc
+4002	0A	store	b		store into b
+1000	0B		readH		read input into acc
+4003	0C	store	c		store into c
+3001	0D	load	load a		load a into accumulator
+5002	0E	add	add b		add b into accumulator
+5003	0F	add	add c		add c into accumulator
+4004	10	store	store sum	store into sum
+3004	11	load	load sum 	load sum to accumulator
+1800	12		printH		print hex to screen
+D015	13	jmpe	if empty, 15	goto 15 if sum is empty
+C006	14	jmp	jmp to 06 	if sum isn't empty, then jump to 06
+3001	15	load	load a 	  	load a
+1800	16		printH 	  	print a
+3002	17	load	load b		load b
+1800	18		printH		print b
+3003	19	load	load c		load c
+1800	1A		printH		print c
+0000	1B	HALT	HALT		HALT
