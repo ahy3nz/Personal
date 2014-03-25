@@ -1,0 +1,17 @@
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+int arrayop(int[] array);
+
+int main() {
+  int array = [1,2,3];
+  num = arrayop(array);
+  cout << num << endl;
+}
+
+int arrayop(int[] array) {
+  int ret = array[1] + array[2] + array[0];
+  return ret;
+}
