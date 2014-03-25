@@ -1,0 +1,19 @@
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+extern "C" int mathlib(int,int);
+extern "C" int product(int,int);
+
+int main(){
+  int a,b;
+  cout << "First parameter: ";
+  cin >> a;
+  cout << "Second parameter; ";
+  cin >> b;
+
+  product = product(a,b);
+  cout<<product<<endl;
+  return 0;
+}

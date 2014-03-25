@@ -1,0 +1,28 @@
+	;; mathlib.s
+	;; first parameter is base, second parameter is exponent
+
+mathlib:
+	;; standard prologue
+	push ebp
+	mov ebp, esp
+	;; add 'a' 'b' times
+	;; store a into one register, b in another register, and sum in another
+	;; eax will be the return value
+	xor	 eax, eax
+	;; ecx will be a, the first parameter
+	mov	 ecx, ebp+8
+	;; edx will be b, the second parameter
+	mov 	edx, ebp+12
+product:
+	;; add a to sum
+	add	eax, ecx
+	;; decrement b
+	dec	edx
+	;; compare b to 0
+	cmp	edx, 0
+	;; if greater than 0, then jump back to product
+	jg	product
+	;; jmp done
+
+
+done:	 
