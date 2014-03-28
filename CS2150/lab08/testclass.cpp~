@@ -1,0 +1,35 @@
+#include <iostream>
+#include <cstdlib>
+#include "testclass.h"
+
+using namespace std;
+
+class testclass {
+public:
+  testclass(int stuff);
+  int getNum();
+  char getChar();
+  string getStr();
+private:
+  int n;
+  char c;
+  string s;
+};
+
+testclass testclass(int stuff) {
+  n = stuff;
+  c = stuff;
+  s = stuff;
+}
+
+int getNum() {
+  return n;
+}
+
+char getchar() {
+  return c;
+}
+
+string getStr() {
+  return s;
+}
