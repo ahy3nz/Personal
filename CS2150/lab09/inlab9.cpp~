@@ -1,0 +1,17 @@
+#include <iostream>
+#include <string>
+#include "subclass.cpp"
+#include "parentclass.cpp"
+
+using namespace std;
+
+int main() {
+
+  SubClass dummy;
+  dummy.SetName("Alex Yang");
+  dummy.setAddress("UVA");
+  dummy.print();
+
+
+
+]

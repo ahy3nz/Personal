@@ -1,0 +1,19 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Name {
+public:
+  Name(void):myName(""){}
+  ~Name(void){ }
+  void SetName(string n){
+    myName = n;
+  }
+  void print(void) {
+    cout << myName <<endl;
+  }
+
+private:
+  string myname;
+};
