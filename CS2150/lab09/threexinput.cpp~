@@ -1,0 +1,12 @@
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+extern "C" int threexplusone(int);
+
+int main(){
+  cout<<threexplusone(32)<<endl;
+
+  return 0;
+}
