@@ -1,4 +1,4 @@
-	.file	"inlab9.cpp"
+	.file	"postlab9.cpp"
 	.intel_syntax noprefix
 	.local	_ZStL8__ioinit
 	.comm	_ZStL8__ioinit,1,1
@@ -279,17 +279,8 @@ main:
 	and	eax, 1
 	sub	eax, edx
 	mov	DWORD PTR [rbp-20], eax
-	mov	eax, DWORD PTR [rbp-20]
-	mov	esi, eax
-	mov	edi, OFFSET FLAT:_ZSt4cout
-.LEHB6:
-	call	_ZNSolsEi
-	mov	esi, OFFSET FLAT:_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_
-	mov	rdi, rax
-	call	_ZNSolsEPFRSoS_E
-	cmp	DWORD PTR [rbp-20], 0
-	je	.L15
 	mov	edi, 24
+.LEHB6:
 	call	_Znwm
 .LEHE6:
 	mov	rbx, rax
@@ -298,25 +289,12 @@ main:
 	call	_ZN8subclassC1Ev
 .LEHE7:
 	mov	QWORD PTR [rbp-32], rbx
-	jmp	.L16
-.L15:
-	mov	edi, 16
-.LEHB8:
-	call	_Znwm
-.LEHE8:
-	mov	rbx, rax
-	mov	rdi, rbx
-.LEHB9:
-	call	_ZN11parentclassC1Ev
-.LEHE9:
-	mov	QWORD PTR [rbp-32], rbx
-.L16:
 	mov	rax, QWORD PTR [rbp-32]
 	mov	rax, QWORD PTR [rax]
 	mov	rdx, QWORD PTR [rax]
 	mov	rax, QWORD PTR [rbp-32]
 	mov	rdi, rax
-.LEHB10:
+.LEHB8:
 	call	rdx
 	mov	eax, 0
 	add	rsp, 16
@@ -326,7 +304,7 @@ main:
 	.cfi_remember_state
 	.cfi_def_cfa 7, 8
 	ret
-.L19:
+.L16:
 	.cfi_restore_state
 	mov	r12, rax
 	mov	rdi, rbx
@@ -334,14 +312,7 @@ main:
 	mov	rax, r12
 	mov	rdi, rax
 	call	_Unwind_Resume
-.L20:
-	mov	r12, rax
-	mov	rdi, rbx
-	call	_ZdlPv
-	mov	rax, r12
-	mov	rdi, rax
-	call	_Unwind_Resume
-.LEHE10:
+.LEHE8:
 	.cfi_endproc
 .LFE982:
 	.section	.gcc_except_table
@@ -357,18 +328,10 @@ main:
 	.uleb128 0
 	.uleb128 .LEHB7-.LFB982
 	.uleb128 .LEHE7-.LEHB7
-	.uleb128 .L19-.LFB982
+	.uleb128 .L16-.LFB982
 	.uleb128 0
 	.uleb128 .LEHB8-.LFB982
 	.uleb128 .LEHE8-.LEHB8
-	.uleb128 0
-	.uleb128 0
-	.uleb128 .LEHB9-.LFB982
-	.uleb128 .LEHE9-.LEHB9
-	.uleb128 .L20-.LFB982
-	.uleb128 0
-	.uleb128 .LEHB10-.LFB982
-	.uleb128 .LEHE10-.LEHB10
 	.uleb128 0
 	.uleb128 0
 .LLSDACSE982:
@@ -435,9 +398,9 @@ _Z41__static_initialization_and_destruction_0ii:
 	mov	DWORD PTR [rbp-4], edi
 	mov	DWORD PTR [rbp-8], esi
 	cmp	DWORD PTR [rbp-4], 1
-	jne	.L21
+	jne	.L17
 	cmp	DWORD PTR [rbp-8], 65535
-	jne	.L21
+	jne	.L17
 	mov	edi, OFFSET FLAT:_ZStL8__ioinit
 	call	_ZNSt8ios_base4InitC1Ev
 	mov	eax, OFFSET FLAT:_ZNSt8ios_base4InitD1Ev
@@ -445,7 +408,7 @@ _Z41__static_initialization_and_destruction_0ii:
 	mov	esi, OFFSET FLAT:_ZStL8__ioinit
 	mov	rdi, rax
 	call	__cxa_atexit
-.L21:
+.L17:
 	leave
 	.cfi_def_cfa 7, 8
 	ret

@@ -14,8 +14,8 @@ public:
     myAddress = n;
   }
   void print(void) {
-    parentclass::print();
-    cout << myAddress << endl;
+    /*    parentclass::print(); */
+    cout << "sub" << endl;
   }
 private:
   string myAddress;

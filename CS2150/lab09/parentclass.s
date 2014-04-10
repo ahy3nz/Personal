@@ -7,27 +7,28 @@
 _Z41__static_initialization_and_destruction_0ii:
 .LFB1012:
 	.cfi_startproc
-	push	ebp
-	.cfi_def_cfa_offset 8
-	.cfi_offset 5, -8
-	mov	ebp, esp
-	.cfi_def_cfa_register 5
-	sub	esp, 24
-	cmp	DWORD PTR [ebp+8], 1
+	push	rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	mov	rbp, rsp
+	.cfi_def_cfa_register 6
+	sub	rsp, 16
+	mov	DWORD PTR [rbp-4], edi
+	mov	DWORD PTR [rbp-8], esi
+	cmp	DWORD PTR [rbp-4], 1
 	jne	.L1
-	cmp	DWORD PTR [ebp+12], 65535
+	cmp	DWORD PTR [rbp-8], 65535
 	jne	.L1
-	mov	DWORD PTR [esp], OFFSET FLAT:_ZStL8__ioinit
+	mov	edi, OFFSET FLAT:_ZStL8__ioinit
 	call	_ZNSt8ios_base4InitC1Ev
 	mov	eax, OFFSET FLAT:_ZNSt8ios_base4InitD1Ev
-	mov	DWORD PTR [esp+8], OFFSET FLAT:__dso_handle
-	mov	DWORD PTR [esp+4], OFFSET FLAT:_ZStL8__ioinit
-	mov	DWORD PTR [esp], eax
+	mov	edx, OFFSET FLAT:__dso_handle
+	mov	esi, OFFSET FLAT:_ZStL8__ioinit
+	mov	rdi, rax
 	call	__cxa_atexit
 .L1:
 	leave
-	.cfi_restore 5
-	.cfi_def_cfa 4, 4
+	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
 .LFE1012:
@@ -36,25 +37,23 @@ _Z41__static_initialization_and_destruction_0ii:
 _GLOBAL__sub_I_parentclass.cpp:
 .LFB1013:
 	.cfi_startproc
-	push	ebp
-	.cfi_def_cfa_offset 8
-	.cfi_offset 5, -8
-	mov	ebp, esp
-	.cfi_def_cfa_register 5
-	sub	esp, 24
-	mov	DWORD PTR [esp+4], 65535
-	mov	DWORD PTR [esp], 1
+	push	rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	mov	rbp, rsp
+	.cfi_def_cfa_register 6
+	mov	esi, 65535
+	mov	edi, 1
 	call	_Z41__static_initialization_and_destruction_0ii
-	leave
-	.cfi_restore 5
-	.cfi_def_cfa 4, 4
+	pop	rbp
+	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
 .LFE1013:
 	.size	_GLOBAL__sub_I_parentclass.cpp, .-_GLOBAL__sub_I_parentclass.cpp
 	.section	.ctors,"aw",@progbits
-	.align 4
-	.long	_GLOBAL__sub_I_parentclass.cpp
+	.align 8
+	.quad	_GLOBAL__sub_I_parentclass.cpp
 	.weakref	_ZL20__gthrw_pthread_oncePiPFvvE,pthread_once
 	.weakref	_ZL27__gthrw_pthread_getspecificj,pthread_getspecific
 	.weakref	_ZL27__gthrw_pthread_setspecificjPKv,pthread_setspecific

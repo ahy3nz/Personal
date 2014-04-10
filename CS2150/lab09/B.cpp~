@@ -1,0 +1,10 @@
+#include <iostream>
+#include <string>
+#include "subclass.cpp"
+#include <stdio.h>
+#include <stdlib.h>
+
+class B:public A{
+  virtual void foo()
+    cout<<"B"<<endl;
+}

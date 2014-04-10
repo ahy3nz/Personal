@@ -1,0 +1,16 @@
+#include <iostream>
+#include <string>
+#include "subclass.cpp"
+#include <stdio.h>
+#include <stdlib.h>
+
+void main() {
+  int which = rand() % 2;
+  A *bar;
+  if (which )
+    bar = new A();
+  else
+    bar = new B();
+  bar-> foo();
+  return 0;
+}

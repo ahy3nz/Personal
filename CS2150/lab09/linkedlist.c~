@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct list{
+  list_item_t *head, *tail;
+  unsigned length;
+  void (*datum_delete)(void *);
+};
+
+struct list_item {
+  struct list_item *prev, *next;
+  void *datum;
+} list_item_t;
+
+int main(){
+  int size;
+  list *stuff;
+  scanf("SIZE: %d", &size);
+  stuff = (list *) malloc(size*5);
+
+  return 0;
+}

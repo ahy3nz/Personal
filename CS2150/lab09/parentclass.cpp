@@ -10,8 +10,8 @@ public:
   void SetName(string n){
     myName = n;
   }
-  void print(void) {
-    cout << myName <<endl;
+  virtual  void print(void) {
+    cout << "parent" <<endl;
   }
 
 private:
