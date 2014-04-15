@@ -34,9 +34,9 @@ huffmannode* huffmannode::getRight() {
 huffmannode* huffmannode::getParent() {
   return parent;
 }
-void huffmannode::setLeft(huffmannode temp) {
-  left = &temp;
+void huffmannode::setLeft(huffmannode* temp) {
+  left = temp;
 }
-void huffmannode::setRight(huffmannode temp) {
-  right = &temp;
+void huffmannode::setRight(huffmannode* temp) {
+  right = temp;
 }

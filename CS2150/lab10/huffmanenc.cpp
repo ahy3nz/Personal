@@ -36,13 +36,17 @@ int main(int argc, char **argv) {
   //if hashtable doesn't contain character, add the character to table
   while ( (g = fgetc(fp)) != EOF ) {
     //    cout<<g<<endl;
-    if(!(table->contains(g))) {
-      table->add( table->hash(g), 1 );
-      contents->push_back(g);
-      ++count;
-    }
-    else {
-      table->increment(g);
+    if(!isspace(g)) {
+      if(!(table->contains(g))) {
+	table->add( table->hash(g), 1 );
+	contents->push_back(g);
+	++count;
+	//cout<<g<<endl;
+      }
+      else {
+	table->increment(g);
+	//cout<<g<<endl;
+      }
     }
   }
     //So now we have hash table full of hash keys (hashed chars) and their values (their count) as well as a list of all the characters
@@ -50,27 +54,43 @@ int main(int argc, char **argv) {
 
   //Next: Store the character frequencies in a heap (priority queue)
   //This means we need to make a vector of huffman nodes
-  vector<huffmannode> *vec = new vector<huffmannode>;
+  cout <<"Making nodes.." << endl;  
+  vector<huffmannode*> vec;// =vector<huffmannode*>;
   
   for(int n=0; n<count; n++)
     {
       char c = contents->at(n);
       //cout<<contents->at(n)<<endl;
-      huffmannode *temp = new huffmannode(c, table->get( table->hash(c) ) );
-      //      cout<<"hi"<<endl;
-      vec->push_back(*temp);
+      if(true)    {  
+	//if(!isspace(c)) {
+	huffmannode *temp = new huffmannode(c, table->get( table->hash(c) ) );
+	cout <<temp->getFreq() << endl;
+	//	cout<<c<<endl;
+	//   cout<<"hi"<<endl;
+	vec.push_back(temp);
+      }
     }
-  priority_queue *pq = new priority_queue(*vec);
- 
-    pq->print();
+
+  priority_queue *pq = new priority_queue();//= new priority_queue(vec);
+  cout<<"Making priority queue.. " <<endl;
+  cout<<vec.size()<<endl;
+  for(int n =0; n<vec.size(); n ++)
+    {
+      cout << vec[n]->getVal() <<endl;
+      pq->insert(vec[n]);
+    }
+  cout<<"Constructing heap.."<<endl;
+  cout<<pq->size()<<endl;
+  pq->print();
     
 //Build a tree of prefix codes that deermine unique bit codes for each character
-//    *pq =  makeTree(pq);
-    //  pq->print();
+  // *pq =  makeTree(pq);
+  //  pq->print();
     //    huffmannode tree = pq->findMin();
     //cout<< "yo"<<endl;
-    huffmannode * tree = makeTree(pq);
-        generateCodes(tree);
+  huffmannode * tree = makeTree(pq);
+    cout<<"generating codes.."<<endl;
+    generateCodes(tree);
 
 //Write the prefix codes to an output file
 //Re-read the source file and for each characer, write its prefix code
@@ -79,36 +99,42 @@ int main(int argc, char **argv) {
 }
 
 huffmannode * makeTree(priority_queue *pq) {
+  int count = 1;
  while(pq->size() > 1) {
-    huffmannode left = pq->deleteMin();
-    huffmannode right = pq->deleteMin();
-    huffmannode parent = pq->deleteMin();
+   huffmannode *left = pq->deleteMin();
+    //cout<< left.getVal()<<endl;
+    huffmannode *right = pq->deleteMin();
+    //cout<<right.getVal()<<endl;
+    huffmannode *parent  = new huffmannode(' ',left->getFreq()+right->getFreq());
     //cout<<"1"<<endl;
-     parent.setLeft(left);
-    
-    parent.setRight(right);
+     parent->setLeft(left);    
+    parent->setRight(right);
     pq->insert(parent);
-    cout<<"step3"<<endl;      
+    ++count;
+    //cout<<count<<endl;
+          
  }
- cout<<"step4"<<endl;
-huffmannode temp= pq->findMin();
- huffmannode *stuff = &temp;
- return stuff;
+ 
+huffmannode *temp= pq->findMin();
+ 
+ return temp;
   
  }
 
 void generateCodes(huffmannode *tree) {
-  cout <<"step5"<<endl;
-  if(!tree->getLeft() && !tree->getRight())
+  
+  if(tree->getLeft()== NULL && tree->getRight()==NULL)
     cout << tree->getVal() <<"\n" <<endl;
-  else if(!tree->getLeft()) {
-    cout<<"0";
+  else if(tree->getLeft()!=NULL) {
+    cout<<"0"<<endl;
     generateCodes(tree->getLeft());
   }
-  else 
+  else if(tree->getRight())
     {
-      cout<<"1";
+      cout<<"1"<<endl;;
       generateCodes(tree->getRight());
     }
+  else {
+  }
 
 }

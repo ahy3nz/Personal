@@ -3,22 +3,35 @@
 // This code is part of the https://github.com/aaronbloomfield/pdr repository
 
 #include <iostream>
+#include <iostream>
+#include <cstdlib>
+#include <stdlib.h>
 #include "heap.h"
 #include "huffmannode.h"
 using namespace std;
 
 // default constructor
 priority_queue::priority_queue() : heap_size(0) {
-    
+  vector<huffmannode*> *heap = new vector<huffmannode*>();
+  huffmannode *dummy = new huffmannode (' ',0);
+  heap->push_back(dummy);
+  // heap[0] = dummy;
 }
 
 // builds a heap from an unsorted vector
-priority_queue::priority_queue(vector<huffmannode> vec) : heap_size(vec.size()) {
+priority_queue::priority_queue(vector<huffmannode*> vec) : heap_size(vec.size()) {
     heap = vec;
+    // for (int n = vec.size(); n>=0; n--) {
+     // cout <<vec[n].getVal()<<endl;
+    // }
+    
     heap.push_back(heap[0]);
-    heap[0] = vec[0];
-    for ( int i = heap_size/2; i > 0; i-- )
-      percolateDown(i);
+    heap[0] = vec.at(0);
+    for ( int i = heap_size; i > 0; i-- )
+      {
+	percolateDown(i);
+	
+      }
     
 }
 
@@ -26,7 +39,7 @@ priority_queue::priority_queue(vector<huffmannode> vec) : heap_size(vec.size()) 
 priority_queue::~priority_queue() {
 }
 
-void priority_queue::insert(huffmannode x) {
+void priority_queue::insert(huffmannode * x) {
     // a vector push_back will resize as necessary
     heap.push_back(x);
     // move it up into the right position
@@ -35,21 +48,21 @@ void priority_queue::insert(huffmannode x) {
 
 void priority_queue::percolateUp(int hole) {
     // get the value just inserted
-    huffmannode x = heap[hole];
+    huffmannode * x = heap[hole];
     // while we haven't run off the top and while the
     // value is less than the parent...
-    for ( ; (hole > 1) && (x.getFreq() < heap[hole/2].getFreq()); hole /= 2 )
+    for ( ; (hole > 1) && (x->getFreq() < heap[hole/2]->getFreq()); hole /= 2 )
         heap[hole] = heap[hole/2]; // move the parent down
     // correct position found!  insert at that spot
     heap[hole] = x;
 }
 
-huffmannode priority_queue::deleteMin() {
+huffmannode  * priority_queue::deleteMin() {
     // make sure the heap is not empty
     if ( heap_size == 0 )
         throw "deleteMin() called on empty heap";
     // save the value to be returned
-    huffmannode ret = heap[1];
+    huffmannode *ret = heap[1];
     // move the last inserted position into the root
     heap[1] = heap[heap_size--];
     // make sure the vector knows that there is one less element
@@ -62,15 +75,15 @@ huffmannode priority_queue::deleteMin() {
 
 void priority_queue::percolateDown(int hole) {
     // get the value to percolate down
-    huffmannode x = heap[hole];
+    huffmannode * x = heap[hole];
     // while there is a left child...
     while ( hole*2 <= heap_size ) {
         int child = hole*2; // the address of left child
         // is there a right child?  if so, is it lesser?
-        if ( (child+1 <= heap_size) && (heap[child+1].getFreq() < heap[child].getFreq() ))
+        if ( (child+1 <= heap_size) && (heap[child+1]->getFreq() < heap[child]->getFreq() ))
             child++;
         // if the child is greater than the node...
-        if ( x.getFreq() > heap[child].getFreq() ) {
+        if ( x->getFreq() < heap[child]->getFreq() ) {
             heap[hole] = heap[child]; // move child up
             hole = child;             // move hole down
         } else
@@ -80,7 +93,7 @@ void priority_queue::percolateDown(int hole) {
     heap[hole] = x;
 }
 
-huffmannode priority_queue::findMin() {
+huffmannode * priority_queue::findMin() {
     if ( heap_size == 0 )
         throw "findMin() called on empty heap";
     return heap[1];
@@ -100,12 +113,12 @@ bool priority_queue::isEmpty() {
 
 void priority_queue::print() {
   //  cout << "(" << heap[0].getVal() << ") ";
-  for ( int i = 0; i < heap_size; i++ ) {
-    cout << heap[i].getVal() << "\t" << heap[i].getFreq()<<endl;;
+  for ( int i = 1; i <= heap_size; i++ ) {
+    cout << heap[i]->getVal() << "\t" << heap[i]->getFreq()<<endl;;
     // next line from from http://tinyurl.com/mf9tbgm
     // bool isPow2 = (((i+1) & ~(i))==(i+1))? i+1 : 0;
-    // if ( isPow2 )
-    //    cout << endl << "\t";
+    //if ( isPow2 )
+    //  cout << endl << "\t";
   }
     cout << endl;
 }

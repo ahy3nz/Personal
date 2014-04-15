@@ -20,8 +20,8 @@ class huffmannode{
   huffmannode* getLeft();
   huffmannode* getRight();
   huffmannode* getParent();
-  void setLeft(huffmannode temp);
-  void setRight(huffmannode temp);
+  void setLeft(huffmannode* temp);
+  void setRight(huffmannode* temp);
  private:
   char val;
   int frequency;
