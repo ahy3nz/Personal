@@ -1,0 +1,26 @@
+/*Alex Yang ahy3nz */
+#include "huffmannode.h"
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <list>
+#include <vector>
+
+using namespace std;
+
+huffmannode::huffmannode()
+{
+}
+
+huffmannode::huffmannode(char g, int freq) {
+  val = g;
+  frequency = freq;
+}
+
+int huffmannode::getFreq(char g) {
+  return frequency;
+}
+
+char huffmannode::getVal() {
+  return val;
+}

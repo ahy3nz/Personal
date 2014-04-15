@@ -1,0 +1,23 @@
+/*Alex Yang ahy3nz */
+#ifndef HUFFMANNODE_H
+#define HUFFMANNODE_H
+
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <list>
+#include <vector>
+
+using namespace std;
+
+class huffmannode{
+
+ public:
+  huffmannode();
+  huffmannode(char g, int freq);
+  getFreq(char g);
+ private:
+  char val;
+  int frequency;
+};
+#endif
