@@ -1,0 +1,14 @@
+#import "listnode.h"
+#import <stdio.h>
+
+@implementation listnode
+- (id) val: (int) newval
+{
+  val = newval;
+  return self;
+}
+
+- (int) val
+{
+  return val;
+}
