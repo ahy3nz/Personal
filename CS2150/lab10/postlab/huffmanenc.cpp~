@@ -1,0 +1,24 @@
+#include <iostream>
+#include <cstdlib>
+#include <stdlib.h>
+using namespace std;
+
+//Read a source file and determine the frequencies of characters in the file
+//huffman list nodes for each character will contain the character and associated frequency
+int main() {
+  int  UniqueSymbols = 26;
+  int frequencies[UniqueSymbols] = {0};
+  const char* ptr = "abbccc";
+  while (*ptr != '\0')
+    ++frequencies[*ptr++];
+  cout << frequencies <<endl;
+  return 0;
+}
+
+
+
+
+//Store the character frequencies in a heap (priority queue)
+//Build a tree of prefix codes that deermine unique bit codes for each character
+//Write the prefix codes to an output file
+//Re-read the source file and for each characer, write its prefix code

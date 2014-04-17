@@ -7,8 +7,8 @@
 #include <stdio.h>
 using namespace std;
 
-huffmannode * makeTree(priority_queue *pq);
-void generateCodes(huffmannode *tree);
+huffmannode* makeTree(priority_queue *pq);
+void generateCodes(huffmannode *tree, string s);
 
 //Read a source file and determine the frequencies of characters in the file
 //make a hashmap that maps character to frequency
@@ -56,7 +56,7 @@ int main(int argc, char **argv) {
   //This means we need to make a vector of huffman nodes
   cout <<"Making nodes.." << endl;  
   vector<huffmannode*> vec;// =vector<huffmannode*>;
-  
+ 
   for(int n=0; n<count; n++)
     {
       char c = contents->at(n);
@@ -64,23 +64,24 @@ int main(int argc, char **argv) {
       if(true)    {  
 	//if(!isspace(c)) {
 	huffmannode *temp = new huffmannode(c, table->get( table->hash(c) ) );
-	cout <<temp->getFreq() << endl;
+	//cout <<temp->getFreq() << endl;
 	//	cout<<c<<endl;
 	//   cout<<"hi"<<endl;
 	vec.push_back(temp);
+	
       }
     }
-
-  priority_queue *pq = new priority_queue();//= new priority_queue(vec);
-  cout<<"Making priority queue.. " <<endl;
-  cout<<vec.size()<<endl;
-  for(int n =0; n<vec.size(); n ++)
-    {
-      cout << vec[n]->getVal() <<endl;
-      pq->insert(vec[n]);
-    }
+ priority_queue *pq = new priority_queue(vec);
+  //priority_queue *pq = new priority_queue();//= new priority_queue(vec);
+  //cout<<"Making priority queue.. " <<endl;
+  // cout<<vec.size()<<endl;
+  //for(int n =0; n<vec.size(); n ++)
+  // {
+  //  cout << vec[n]->getVal() <<endl;
+  //   pq->insert(vec[n]);
+  // }
   cout<<"Constructing heap.."<<endl;
-  cout<<pq->size()<<endl;
+  //cout<<pq->size()<<endl;
   pq->print();
     
 //Build a tree of prefix codes that deermine unique bit codes for each character
@@ -90,7 +91,7 @@ int main(int argc, char **argv) {
     //cout<< "yo"<<endl;
   huffmannode * tree = makeTree(pq);
     cout<<"generating codes.."<<endl;
-    generateCodes(tree);
+    generateCodes(tree,"");
 
 //Write the prefix codes to an output file
 //Re-read the source file and for each characer, write its prefix code
@@ -102,16 +103,16 @@ huffmannode * makeTree(priority_queue *pq) {
   int count = 1;
  while(pq->size() > 1) {
    huffmannode *left = pq->deleteMin();
-    //cout<< left.getVal()<<endl;
-    huffmannode *right = pq->deleteMin();
-    //cout<<right.getVal()<<endl;
-    huffmannode *parent  = new huffmannode(' ',left->getFreq()+right->getFreq());
-    //cout<<"1"<<endl;
-     parent->setLeft(left);    
-    parent->setRight(right);
-    pq->insert(parent);
-    ++count;
-    //cout<<count<<endl;
+   //cout<< left.getVal()<<endl;
+   huffmannode *right = pq->deleteMin();
+   //cout<<right.getVal()<<endl;
+   huffmannode *parent  = new huffmannode(' ',left->getFreq()+right->getFreq());
+   //cout<<"1"<<endl;
+   parent->setLeft(left);    
+   parent->setRight(right);
+   pq->insert(parent);
+   ++count;
+   //cout<<count<<endl;
           
  }
  
@@ -121,9 +122,31 @@ huffmannode *temp= pq->findMin();
   
  }
 
-void generateCodes(huffmannode *tree) {
+void generateCodes(huffmannode *tree,string s) {
+  huffmannode* root;
+  root  = tree;
   
-  if(tree->getLeft()== NULL && tree->getRight()==NULL)
+  root->setPrefix(s);
+  if(root == NULL) {
+  }
+  else if (root->getLeft() == NULL && root->getRight() == NULL) {
+    cout<< root->getVal() << " " << root->getPrefix() << endl;
+  }
+  else {
+string    leftstring = s.append("0");
+    s.erase(s.end()-1);
+   string  rightstring = s.append("1");
+    s.erase(s.end()-1);
+    
+    root->getLeft()->setPrefix(leftstring);
+    root->getRight()->setPrefix(rightstring);
+    
+    
+    generateCodes(root->getLeft(), leftstring);
+    generateCodes(root->getRight(), rightstring);
+  }
+				
+  /*  if(tree->getLeft()== NULL && tree->getRight()==NULL)
     cout << tree->getVal() <<"\n" <<endl;
   else if(tree->getLeft()!=NULL) {
     cout<<"0"<<endl;
@@ -135,6 +158,6 @@ void generateCodes(huffmannode *tree) {
       generateCodes(tree->getRight());
     }
   else {
-  }
+  }*/
 
 }
