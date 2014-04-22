@@ -14,7 +14,7 @@ AS	=
 ASFLAGS	= 
 
 # All of the .o files for our program
-OFILES	= topological.o 
+OFILES	= traveling-skeleton.o  middleearth.o
 
 # This tells make to create a .o file from a .cpp file, using the
 # defaults above (i.e. the CXX and CXXFLAGS macros)
@@ -44,6 +44,9 @@ clean:
 	/bin/rm -f *.o *~
 
 # We don't have any dependencies for this small program
-topological.o: topological.cpp 
-	$(CXX) -c topological.cpp
+traveling-skeleton.o: traveling-skeleton.cpp 
+	$(CXX) $(CXXFLAGS) -c traveling-skeleton.cpp
+	$(DOXY)
+middleearth.o: middleearth.cpp middleearth.h
+	$(CXX) $(CXXFLAGS) -c middleearth.cpp
 	$(DOXY)
