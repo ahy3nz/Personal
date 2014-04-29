@@ -1,0 +1,2 @@
+%Alex Yang ahy3nz
+My only suggestion is to try to increase the number of TAs or TA hours. I would be in stacks for almost an hour before the TA could come help. By that time, I had already solved the problem. This means the TAs either become useless or incredibly inefficient. I realize there are budget constraints, so maybe more tips/tricks could be used, especially for the x86 labs. When it came to the x86 labs, I felt like I really didn't even know how to code in assembly. Also it even felt like I didn't actually know how to code in c++.
